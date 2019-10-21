@@ -1,0 +1,18 @@
+from cassandra.cluster import Cluster
+from cassandra import ConsistencyLevel
+from cassandra.query import SimpleStatement
+
+cluster = Cluster()
+connection = cluster.connect('yourmom')
+
+
+
+query= '''INSERT INTO yourmom."YES"(name, lider, family)
+VALUES ('Misha1','nono1',{"batya":3, "mom":'ahuuu'});'''
+print(query)
+
+query_1 = SimpleStatement(query, consistency_level=ConsistencyLevel.ALL)
+xxx = connection.execute(query_1)
+
+result = connection.execute('''select * from yourmom."YES"''')[0]
+print (result)
