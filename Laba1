@@ -1,0 +1,52 @@
+CREATE KEYSPACE yourmom
+WITH replication={
+  'class':'SimpleStrategy',
+  'replication_factor':1
+};
+
+CREATE TABLE IF NOT EXISTS yourmom."YES"
+(
+  name text,
+  lider text,
+  PRIMARY KEY(lider)
+  
+);
+
+CREATE TYPE IF NOT EXISTS yourmom."fam"
+(
+  batya int,
+  mom text
+  
+);
+
+DROP TABLE IF EXISTS yourmom."YES";
+
+CREATE TABLE IF NOT EXISTS yourmom."YES"
+(
+  name text,
+  lider text,
+  family FROZEN<fam>,
+  PRIMARY KEY(lider)
+  
+);
+
+CREATE INDEX IF NOT EXISTS fama on yourmom."YES"(family);
+
+INSERT INTO yourmom."YES"(name, lider, family)
+VALUES ('Kolya','yaya',{"batya":1, "mom":'ugu'});
+
+INSERT INTO yourmom."YES"(name, lider, family)
+VALUES ('Misha','nono',{"batya":2, "mom":'ahu'});
+
+
+
+UPDATE ticheter."Goods_Result_Store_Characteristic"
+SET 
+  name_goods={
+          name: 'IPhone11',
+          model: 'Apple'
+        }
+WHERE id_goods = 1 and charac_availability= true and id_store= 0 ;
+
+SELECT *
+FROM yourmom."YES";
